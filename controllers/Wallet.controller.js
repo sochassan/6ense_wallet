@@ -53,7 +53,6 @@ const generateWalletAccount = asyncHandler(async (req, res) => {
     return res.status(200).json({ account, seedPhrase: seedPhrase.includes(" ") ? seedPhrase : "" });
 });
 
-
 const createOrImportAccount = asyncHandler(async (req, res) => {
     const { walletId, privateKey, index = 0 } = req.body;
 
@@ -107,4 +106,32 @@ const createOrImportAccount = asyncHandler(async (req, res) => {
     }
 });
 
-export { generateWalletAccount, createOrImportAccount };
+
+const getAccountsList = asyncHandler(async (req, res) => {
+
+    const { walletId } = req.body;
+
+    let wallet = await WalletSchema.findById(walletId);
+    if (!wallet) {
+        return res.status(400).json({
+            status: false,
+            message: "wallet not found"
+        })
+    }
+    let account = await AccountSchema.findById(wallet._id);
+    if (!account) {
+        return res.status(400).json({
+            status: false,
+            message: "account not found"
+        })
+    }
+    return res.status(200).json({
+        status: true,
+        message: "Succesfully get",
+        account
+    })
+})
+
+
+
+export { generateWalletAccount, createOrImportAccount, getAccountsList };
