@@ -4,7 +4,7 @@ import { WalletSchema } from "#models/wallet_model";
 import { NetworkSchema } from "#models/wallet_network_model";
 import { Wallet } from "ethers";
 
-// This function is responsible for create new wallet
+
 const generateWalletAccount = asyncHandler(async (req, res) => {
 
     let { seedPhrase = "", index = 0 } = req.body;
@@ -54,7 +54,6 @@ const generateWalletAccount = asyncHandler(async (req, res) => {
 });
 
 
-// Function to create or import an account for an existing wallet
 const createOrImportAccount = asyncHandler(async (req, res) => {
     const { walletId, privateKey, index = 0 } = req.body;
 
@@ -108,4 +107,4 @@ const createOrImportAccount = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { generateWalletAccount, createOrImportAccount };
+export { generateWalletAccount, createOrImportAccount };

@@ -8,8 +8,8 @@ const ACCOUNT_TYPE = ['balance', 'blockchain']
 const COINS = ['BTC', 'USDT', 'ETH', 'TRX', 'USDC', 'ETHW']
 const CURRENCY = ['BTC', 'ETH', 'XLM', 'BCH', 'ATOM', 'XRP', 'LINK']
 const STATE = ['normal', 'freeze']
-const STATUS = ['contract', 'send','recived']
-const TRANSACTION = ['failed', 'cancel','error','success']
+const STATUS = ['contract', 'send', 'recived']
+const TRANSACTION = ['failed', 'cancel', 'error', 'success']
 
 
-export {STATUS, TRANSACTION, COINS, STATE, CURRENCY, ACCOUNT_TYPE, PNG, JPG, JPEG, JWT_ERRORS, TOKEN_EXPIRE_TIME, PATH};
+export { STATUS, TRANSACTION, COINS, STATE, CURRENCY, ACCOUNT_TYPE, PNG, JPG, JPEG, JWT_ERRORS, TOKEN_EXPIRE_TIME, PATH };
