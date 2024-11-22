@@ -11,33 +11,40 @@ const sendToken = asyncHandler(async (req, res) => {
 
     let walletData = await WalletSchema.findById(walletId);
 
+    console.log("🚀 ~ sendToken ~ walletData:", walletData)
+
     if (!walletData) {
         return res.status(400).json({ message: "Wallet not found" });
     }
+
+    let receipt = "";
+    let wallet = "";
+    let networkData = "";
+
     try {
 
-        let networkData = await NetworkSchema.find({ chainId: walletData.active_network_chainId });
-
+        networkData = await NetworkSchema.findById(walletData.active_network_id);
+        
+        console.log("🚀 ~ sendToken ~ networkData:", networkData)
+        
         const provider = new ethers.providers.JsonRpcProvider(networkData.rpcUrl); // Creating provider
 
-        const wallet = new ethers.Wallet(privateKey, provider);
+        wallet = new ethers.Wallet(privateKey, provider);
 
         const tx = { to, value: ethers.utils.parseEther(amount.toString()) };
 
         const transaction = await wallet.sendTransaction(tx);
 
-        const receipt = await transaction.wait();
-
-        let from = wallet.address;
+        receipt = await transaction.wait();
 
         let transactons = new TransactionSchema({
             walletId: walletId,
             amount: amount,
-            from: from,
+            from: wallet.address,
             to: to,
-            transaction_type: "transfer",
-            status: "complete",
-            chainId: walletData.active_network_chainId,
+            transaction_type: "send",
+            status: "success",
+            chainId: networkData.chainId,
             transaction_hash: receipt.hash,
         })
 
@@ -50,11 +57,11 @@ const sendToken = asyncHandler(async (req, res) => {
         let transactons = new TransactionSchema({
             walletId: walletId,
             amount: amount,
-            from: from,
+            from: wallet.address,
             to: to,
-            transaction_type: "transfer",
+            transaction_type: "send",
             status: "failed",
-            chainId: walletData.active_network_chainId,
+            chainId: networkData.chainId,
             transaction_hash: receipt.hash,
         })
 

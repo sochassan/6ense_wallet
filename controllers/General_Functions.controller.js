@@ -15,7 +15,11 @@ const getNativeCurrencyPrice = asyncHandler(async (req, res) => {
 
         const response = await axios.get(apiUrl);
 
+        console.log("🚀 ~ getNativeCurrencyPrice ~ response:", response.data)
+
         const price = response.data.ethereum[currency.toLowerCase()];
+
+        console.log("🚀 ~ getNativeCurrencyPrice ~ price:", price)
 
         if (!price) {
             return res.status(404).json({ message: "Price data not found for the requested currency" });

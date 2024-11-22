@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const NewWalletSchema = new mongoose.Schema(
     {
-        active_address: { type: String, ref: "AccountSchema" },
+        wallet_default_address: { type: String },
+        active_account_id: { type: String, ref: "AccountSchema" },
         account: [{ type: String, ref: "AccountSchema" }],
-        active_network_chainId: { type: String, default: "1" },
+        active_network_id: { type: String, ref: "NetworkSchema" },
         networks: [{ type: String, ref: "NetworkSchema" }]
-
     },
     { timestamps: true }
 );

@@ -5,6 +5,6 @@ import { getNativeCurrencyPrice } from "#controllers/General_Functions.controlle
 
 const generalRoute = express.Router();
 
-generalRoute.route("/getNativeCurrencyPrice").post(getNativeCurrencyPrice);
+generalRoute.route("/getNativeCurrencyPrice").get(getNativeCurrencyPrice);
 
 export default generalRoute;

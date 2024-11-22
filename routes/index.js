@@ -8,9 +8,9 @@ import transactionRoute from "#routes/transaction.routes";
 
 const routes = (app) => {
 
-  app.get("*", (req, res) => {
-    res.send("404 Page Not Found!")
-  })
+  // app.get("*", (req, res) => {
+  //   res.send("404 Page Not Found!")
+  // })
 
   app.use(error);
 

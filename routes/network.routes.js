@@ -1,8 +1,9 @@
 import express from "express";
-import { getAddedNetworksList } from "#controllers/Network.controller";
+import { addNetwork, getAddedNetworksList } from "#controllers/Network.controller";
 
 const networkRoute = express.Router();
 
-networkRoute.route("/getAddedNetworksList").post(getAddedNetworksList);
+networkRoute.route("/addNetwork").post(addNetwork);
+networkRoute.route("/getAddedNetworksList/:walletId").get(getAddedNetworksList);
 
 export default networkRoute;
